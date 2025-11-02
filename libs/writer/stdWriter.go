@@ -75,6 +75,7 @@ func (w StdWriter[T]) String() string {
 		for _, v := range w.data {
 			out = append(out, v.String())
 		}
+		out = append(out, "\n")
 	case JSON:
 		out = append(out, w.json())
 	case YAML:

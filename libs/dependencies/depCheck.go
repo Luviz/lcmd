@@ -2,6 +2,7 @@ package dependencies
 
 import (
 	"fmt"
+	"os/exec"
 )
 
 type Dependency struct {
@@ -35,6 +36,10 @@ func CheckDependencies() []DependencyCheckResult {
 
 func CheckDependency(dep Dependency) DependencyCheckResult {
 	status := true
+	_, err := exec.Command("type", dep.CmdName).Output()
+	if err != nil {
+		status = false
+	}
 
 	return DependencyCheckResult{
 		Status: status,
